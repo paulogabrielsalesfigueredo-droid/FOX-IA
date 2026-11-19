@@ -3,124 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FoxIA - Igual Kling</title>
+<title>FoxIA PRO - Vitrine</title>
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#0a0a0a;color:white;padding-bottom:90px}
-.top{position:sticky;top:0;background:#0a0a0a;z-index:10;padding:14px 14px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
-.logo{font-weight:900;font-size:22px}.logo span{color:#00e676}
-.btn-top{background:#00e676;color:#000;border:none;padding:9px 16px;border-radius:20px;font-weight:900;font-size:13px}
-.hero{padding:16px 14px 4px}
-.hero h1{font-size:28px;margin:0;line-height:1.1}.hero h1 span{color:#00e676}
+body{margin:0;background:#000;color:#fff;padding-bottom:88px}
+.top{position:sticky;top:0;z-index:20;background:#000;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid #222}
+.logo{font-weight:900;font-size:21px}.logo i{color:#00e676;font-style:normal}
+.btnBaixar{background:#00e676;color:#000;border:0;padding:9px 18px;border-radius:20px;font-weight:900}
+.hero{padding:14px}
+.hero h1{font-size:28px;line-height:1.05;margin:0}.hero h1 span{color:#00e676}
 .hero p{color:#aaa;font-size:13px;margin:8px 0 12px}
-.pillrow{display:flex;gap:8px;overflow:auto;padding-bottom:6px}
-.pill{white-space:nowrap;padding:8px 14px;border-radius:20px;background:#1c1c1c;border:1px solid #2a2a2a;font-size:13px}
-.pill.active{background:white;color:black;font-weight:bold}
-.createbox{margin:12px 14px;background:#161616;border:1px solid #2a2a2a;border-radius:20px;padding:14px}
-.createbox textarea{width:100%;background:#222;border:1px solid #333;color:white;border-radius:14px;padding:12px;font-size:14px;outline:none;resize:none}
-.styles{display:flex;gap:8px;overflow:auto;margin:10px 0}
-.s{white-space:nowrap;padding:8px 12px;border-radius:20px;background:#222;font-size:12px;border:1px solid #333}
-.s.active{background:#00e676;color:#000;font-weight:bold}
-.btn-main{width:100%;background:#00e676;color:#000;border:none;padding:14px;border-radius:14px;font-weight:900;font-size:15px}
-.btn-ghost{width:100%;background:#222;color:white;border:none;padding:12px;border-radius:14px;margin-top:8px;font-weight:bold}
-#result{display:none;margin-top:12px}
-#result img{width:100%;border-radius:16px}
-#loading{display:none;text-align:center;padding:14px;color:#00e676;font-weight:bold}
-.feed{padding:10px 14px}
-.feed h3{font-size:17px;margin:10px 0}
+.pills{display:flex;gap:8px;overflow:auto}
+.pill{white-space:nowrap;background:#1c1c1c;border:1px solid #2a2a2a;padding:8px 14px;border-radius:20px;font-size:13px}
+.pill.on{background:#fff;color:#000;font-weight:900}
+.box{margin:0 14px;background:#141414;border:1px solid #262626;border-radius:20px;padding:14px}
+.box textarea{width:100%;background:#222;border:1px solid #333;color:#fff;border-radius:12px;padding:12px;font-size:14px;outline:none}
+.chips{display:flex;gap:8px;overflow:auto;margin:10px 0}
+.chip{white-space:nowrap;background:#222;border:1px solid #333;padding:8px 12px;border-radius:20px;font-size:12px}
+.chip.on{background:#00e676;color:#000;font-weight:900}
+.btn{width:100%;background:#00e676;color:#000;border:0;padding:14px;border-radius:14px;font-weight:900;font-size:15px}
+.btn2{width:100%;background:#262626;color:#fff;border:0;padding:12px;border-radius:14px;margin-top:8px;font-weight:800}
+#res{display:none;margin-top:12px}
+#res img,#res video{width:100%;border-radius:14px}
+.feed{padding:14px}
 .grid{columns:2;column-gap:10px}
-.card{break-inside:avoid;margin-bottom:12px;background:#161616;border-radius:16px;overflow:hidden;border:1px solid #222}
-.card img{width:100%;display:block}
-.card .info{padding:10px}
-.card .title{font-size:13px;font-weight:bold;line-height:1.3}
-.card .user{font-size:12px;color:#aaa;margin-top:6px;display:flex;justify-content:space-between}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;justify-content:space-around;align-items:center;padding:10px 10px 14px;z-index:20}
-.bottom div{text-align:center;font-size:11px;color:#aaa}
-.bottom .plus{width:52px;height:52px;background:#00e676;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-size:30px;font-weight:900;margin-top:-28px;border:4px solid #0a0a0a}
-.bottom .active{color:white}
+.card{break-inside:avoid;background:#141414;border:1px solid #222;border-radius:16px;overflow:hidden;margin-bottom:12px;position:relative}
+.card img,.card video{width:100%;display:block}
+.play{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.info{padding:10px}.t{font-size:13px;font-weight:800;line-height:1.3}
+.u{font-size:12px;color:#aaa;display:flex;justify-content:space-between;margin-top:7px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;justify-content:space-around;align-items:center;padding:8px 10px 12px;z-index:30}
+.bottom div{text-align:center;font-size:11px;color:#999}
+.bottom .on{color:#fff}
+.plus{width:54px;height:54px;background:#00e676;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-size:32px;font-weight:900;margin-top:-30px;border:4px solid #000}
+.badge{background:#00e676;color:#000;font-size:11px;font-weight:900;padding:3px 8px;border-radius:20px}
 </style>
 </head>
 <body>
-<div class="top"><div class="logo">🦊 Fox<span>IA</span></div><button class="btn-top" onclick="document.getElementById('prompt').focus()">Baixar</button></div>
+<div class="top"><div class="logo">🦊 Fox<span style="color:#00e676">IA</span> <span class="badge">PRO</span></div><button class="btnBaixar" onclick="window.scrollTo({top:0,behavior:'smooth'})">Baixar</button></div>
 <div class="hero">
 <h1>AI para criar<br><span>sucessos de bilheteria</span></h1>
-<p>Crie foto e vídeo estilo cinema em segundos. Grátis.</p>
-<div class="pillrow">
-<div class="pill active" onclick="setPill(this,'foto')">✨ Para você</div>
-<div class="pill" onclick="setPill(this,'video')">🎬 Vídeo</div>
-<div class="pill" onclick="setPill(this,'foto')">📸 Foto</div>
-<div class="pill" onclick="setPill(this,'foto')">🔥 Em alta</div>
+<p>Crie foto e vídeo estilo cinema. Vitrine oficial FoxIA.</p>
+<div class="pills"><div class="pill on">✨ Para você</div><div class="pill">🎬 Vídeo</div><div class="pill">📸 Foto</div><div class="pill">🔥 Em alta</div></div>
 </div>
+<div class="box">
+<textarea id="prompt" rows="2">Raposa laranja fofa estilo Pixar dançando na floresta</textarea>
+<div class="chips">
+<div class="chip on" data-v="3D Pixar style, cute, cinematic">🧸 Pixar</div>
+<div class="chip" data-v="realistic, professional, 8k">📷 Realista</div>
+<div class="chip" data-v="anime style">🌸 Anime</div>
+<div class="chip" data-v="Disney style, magical">🏰 Disney</div>
 </div>
-<div class="createbox">
-<textarea id="prompt" rows="2">Raposa laranja fofa no estilo Pixar, floresta mágica</textarea>
-<div class="styles" id="styles">
-<div class="s active" data-v="3D Pixar style, cute, ultra detailed, cinematic">🧸 Pixar</div>
-<div class="s" data-v="realistic photo, professional, 8k">📷 Realista</div>
-<div class="s" data-v="anime style, beautiful">🌸 Anime</div>
-<div class="s" data-v="Disney style, magical">🏰 Disney</div>
-<div class="s" data-v="cyberpunk neon">🌃 Cyberpunk</div>
-</div>
-<button class="btn-main" onclick="gerar()">✨ GERAR AGORA</button>
-<button class="btn-ghost" onclick="surpreender()">🎲 SURPREENDA-ME</button>
-<div id="loading">🦊 Gerando sua obra... aguarde 5s...</div>
-<div id="result">
-<img id="imgOut" src="">
-<button class="btn-main" style="margin-top:10px" onclick="baixar()">⬇️ BAIXAR EM HD</button>
-<button class="btn-ghost" onclick="compartilhar()">💚 COMPARTILHAR NO WHATSAPP</button>
-</div>
-<div id="videoBox" style="display:none;margin-top:10px;background:#222;padding:12px;border-radius:12px;font-size:13px;line-height:1.5">
-<b>🎬 Seu prompt de vídeo pronto:</b><br><span id="videoPrompt"></span><br><button class="btn-ghost" onclick="copiarVideo()">📋 COPIAR</button>
-<a href="https://hailuoai.video" target="_blank"><button class="btn-main" style="margin-top:8px">🚀 GERAR VÍDEO GRÁTIS NO HAILUO</button></a>
-</div>
+<button class="btn" onclick="gerar()">✨ GERAR AGORA</button>
+<button class="btn2" onclick="surpreender()">🎲 SURPREENDA-ME</button>
+<div id="loading" style="display:none;text-align:center;padding:12px;color:#00e676;font-weight:900">🦊 Gerando... 5s...</div>
+<div id="res"><img id="imgOut"><button class="btn" style="margin-top:10px" onclick="baixar()">⬇️ BAIXAR EM HD</button><button class="btn2" onclick="compartilhar()">💚 COMPARTILHAR NO WHATSAPP</button></div>
+<div id="videoBox" style="display:none;margin-top:10px;background:#222;padding:12px;border-radius:12px;font-size:13px;line-height:1.5"><b>🎬 Prompt de vídeo pronto:</b><br><span id="vp"></span><br><button class="btn2" onclick="copiar()">📋 COPIAR PROMPT</button><a href="https://hailuoai.video" target="_blank"><button class="btn" style="margin-top:8px">🚀 GERAR VÍDEO GRÁTIS NO HAILUO</button></a></div>
 </div>
 <div class="feed">
-<h3>🔥 Para você</h3>
-<div class="grid" id="feedGrid"></div>
+<h3 style="margin:4px 0 12px">🔥 Para você - Vitrine</h3>
+<div class="grid">
+<div class="card"><video src="https://videos.pexels.com/video-files/854100/854100-hd_1280_720_25fps.mp4" muted loop playsinline poster="https://image.pollinations.ai/prompt/Cute%20fox%20dancing%20in%20forest%2C%203D%20Pixar?width=600&height=800&nologo=true" onclick="this.paused?this.play():this.pause()"></video><div class="play">▶</div><div class="info"><div class="t">Raposa dançando na floresta mágica</div><div class="u"><span>🦊 FoxIA</span><span>🤍 1.2k</span></div></div></div>
+<div class="card"><img src="https://image.pollinations.ai/prompt/Beautiful%20girl%20with%20vintage%20phone%2C%20realistic%2C%2080s%20style?width=600&height=750&nologo=true" onclick="usar('Mulher linda com telefone vintage anos 80')"><div class="play">▶</div><div class="info"><div class="t">Eu amo a Barbie 💖</div><div class="u"><span>👤 lembrança</span><span>🤍 35</span></div></div></div>
+<div class="card"><video src="https://videos.pexels.com/video-files/2795747/2795747-hd_1080_1920_25fps.mp4" muted loop playsinline poster="https://image.pollinations.ai/prompt/Two%20men%20dancing%20happy%20in%20shop?width=600&height=750&nologo=true" onclick="this.paused?this.play():this.pause()"></video><div class="play">▶</div><div class="info"><div class="t">Equipe de dança Love V Make</div><div class="u"><span>👤 tuqjiRHK</span><span>🤍 148</span></div></div></div>
+<div class="card"><img src="https://image.pollinations.ai/prompt/Apple%20banana%20strawberry%20characters%2C%203D%20Pixar%20style%2C%20funny?width=600&height=750&nologo=true" onclick="usar('Frutas que viraram gente, estilo Pixar')"><div class="play">▶</div><div class="info"><div class="t">Frutas que viraram gente 🍎🍌</div><div class="u"><span>🦊 FoxIA</span><span>🤍 212</span></div></div></div>
+<div class="card"><img src="https://image.pollinations.ai/prompt/Cute%20orange%20fox%20astronaut%20in%20space%2C%203D%20Pixar?width=600&height=750&nologo=true" onclick="usar('Raposa astronauta no espaço')"><div class="play">▶</div><div class="info"><div class="t">Conheça o FoxIA Image 4.0</div><div class="u"><span>🦊 FoxIA</span><span>🤍 167</span></div></div></div>
+<div class="card"><video src="https://videos.pexels.com/video-files/3205624/3205624-hd_1920_1080_25fps.mp4" muted loop playsinline poster="https://image.pollinations.ai/prompt/Castle%20in%20clouds%2C%20anime%2C%20magical?width=600&height=750&nologo=true" onclick="this.paused?this.play():this.pause()"></video><div class="play">▶</div><div class="info"><div class="t">Castelo flutuante nas nuvens</div><div class="u"><span>🦊 FoxIA</span><span>🤍 98</span></div></div></div>
 </div>
-<div class="bottom">
-<div class="active">🏠<br>Início</div>
-<div>🔍<br>Explorar</div>
-<div class="plus" onclick="window.scrollTo({top:0,behavior:'smooth'})">+</div>
-<div>📁<br>Ativos</div>
-<div>👤<br>Sobre</div>
 </div>
+<div class="bottom"><div class="on">🏠<br>Início</div><div>🔍<br>Explorar</div><div class="plus" onclick="window.scrollTo({top:0,behavior:'smooth'})">+</div><div>📁<br>Ativos</div><div>👤<br>Sobre</div></div>
 <script>
-let estilo="3D Pixar style, cute, ultra detailed, cinematic";
-let modo="foto";
-document.querySelectorAll('.s').forEach(c=>{c.onclick=()=>{document.querySelectorAll('.s').forEach(x=>x.classList.remove('active'));c.classList.add('active');estilo=c.dataset.v;}});
-function setPill(el,m){document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');modo=m;if(m==='video'){gerarVideo();}else{document.getElementById('videoBox').style.display='none';}}
-const feed=[
-["Raposa astronauta no espaço","FoxIA Oficial","167","Cute orange fox astronaut in space, 3D Pixar style, cute"],
-["Eu amo a Barbie 💖","lembrança","35","Beautiful girl with vintage phone, realistic, 80s style"],
-["Equipe de dança Love V","tuqjiRHK","148","Two happy men dancing in a shop, funny, realistic"],
-["Frutas que viraram gente","FoxIA Oficial","212","Apple banana strawberry characters, 3D Pixar style, funny"],
-["Castelo flutuante","FoxIA Oficial","98","Floating castle in clouds, anime style, magical"],
-["Raposa na floresta mágica","FoxIA Oficial","189","Cute fox with butterflies in magical forest, Disney style"],
-];
-let html="";
-feed.forEach(f=>{
-let url="https://image.pollinations.ai/prompt/"+encodeURIComponent(f[3])+"?width=600&height=750&seed="+Math.floor(Math.random()*9999)+"&nologo=true";
-html+=`<div class="card"><img src="${url}" onclick="usar('${f[3]}')" loading="lazy"><div class="info"><div class="title">${f[0]}</div><div class="user"><span>🦊 ${f[1]}</span><span>🤍 ${f[2]}</span></div></div></div>`;
-});
-document.getElementById('feedGrid').innerHTML=html;
-function gerar(){
-if(modo==='video'){gerarVideo();return;}
-let p=document.getElementById('prompt').value;
-document.getElementById('loading').style.display='block';
-document.getElementById('result').style.display='none';
-let url="https://image.pollinations.ai/prompt/"+encodeURIComponent(p+", "+estilo+", high quality, no text")+"?width=1024&height=1024&seed="+Math.floor(Math.random()*99999)+"&nologo=true";
-let img=document.getElementById('imgOut');
-img.onload=()=>{document.getElementById('loading').style.display='none';document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});};
-img.onerror=()=>{setTimeout(()=>{img.src=url+"&retry=1"},2000);};
-img.src=url;
-}
+let estilo="3D Pixar style, cute, cinematic";
+document.querySelectorAll('.chip').forEach(c=>{c.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');estilo=c.dataset.v;}});
+function gerar(){let p=document.getElementById('prompt').value;document.getElementById('loading').style.display='block';document.getElementById('res').style.display='none';let url="https://image.pollinations.ai/prompt/"+encodeURIComponent(p+", "+estilo+", high quality, no text")+"?width=1024&height=1024&seed="+Math.floor(Math.random()*99999)+"&nologo=true";let img=document.getElementById('imgOut');img.onload=()=>{document.getElementById('loading').style.display='none';document.getElementById('res').style.display='block';};img.src=url;let final=estilo+", "+p+", movimento suave, camera cinematografica, 4k";document.getElementById('vp').innerText=final;document.getElementById('videoBox').style.display='block';}
 function usar(t){document.getElementById('prompt').value=t;window.scrollTo({top:0,behavior:'smooth'});gerar();}
-function surpreender(){let ideias=["Raposa laranja com óculos de sol na praia","Gato astronauta surfando em meteoro","Dragão bebê comendo sorvete gigante","Unicórnio rosa voando sobre cidade neon"];document.getElementById('prompt').value=ideias[Math.floor(Math.random()*ideias.length)];gerar();}
+function surpreender(){let a=["Raposa com óculos de sol na praia","Gato astronauta surfando em meteoro","Dragão bebê comendo sorvete gigante","Unicórnio rosa voando sobre cidade neon"];document.getElementById('prompt').value=a[Math.floor(Math.random()*a.length)];gerar();}
 function baixar(){let a=document.createElement('a');a.href=document.getElementById('imgOut').src;a.target='_blank';a.click();}
-function compartilhar(){window.open("https://wa.me/?text="+encodeURIComponent("Olha o que criei no FoxIA 🦊 https://paulogabrielsalesfigueredo-droid.github.io/FOX-IA/"),"_blank");}
-function gerarVideo(){let p=document.getElementById('prompt').value;let final=estilo+", "+p+", movimento suave, câmera cinematográfica, 4k";document.getElementById('videoPrompt').innerText=final;document.getElementById('videoBox').style.display='block';}
-function copiarVideo(){navigator.clipboard.writeText(document.getElementById('videoPrompt').innerText);alert("Copiado! Cola no Hailuo 🚀");}
+function compartilhar(){window.open("https://wa.me/?text="+encodeURIComponent("Olha o FoxIA PRO 🦊 https://paulogabrielsalesfigueredo-droid.github.io/FOX-IA/"),"_blank");}
+function copiar(){navigator.clipboard.writeText(document.getElementById('vp').innerText);alert("Copiado! Cola no Hailuo 🚀");}
 </script>
 </body>
 </html>

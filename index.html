@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoxIA - Crie Foto e Vídeo com IA</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#0f0f0f;color:white;text-align:center;padding:0 14px 40px}
+header{padding:28px 10px 10px}
+.logo{font-size:64px}
+h1{font-size:32px;margin:5px 0;color:#ff7a00}
+h1 span{color:white}
+p.sub{color:#bbb;margin:0 0 18px}
+.tabs{display:flex;gap:10px;max-width:500px;margin:0 auto 18px}
+.tab{flex:1;padding:13px;border-radius:14px;background:#1e1e1e;border:2px solid #333;cursor:pointer;font-weight:bold;color:#aaa}
+.tab.active{background:#ff7a00;color:white;border-color:#ff7a00}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:20px;padding:18px;max-width:500px;margin:0 auto;text-align:left}
+label{font-size:13px;color:#ccc;font-weight:bold}
+textarea,input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #333;background:#222;color:white;margin:7px 0 12px;font-size:15px;outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{padding:8px 12px;border-radius:20px;background:#262626;border:1px solid #333;font-size:13px;cursor:pointer}
+.chip.active{background:#ff7a00;border-color:#ff7a00}
+button{width:100%;padding:15px;border:none;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer}
+.btn-main{background:#ff7a00;color:white}
+.btn-ghost{background:#262626;color:white;margin-top:10px}
+.btn-green{background:#25D366;color:white;margin-top:10px}
+#result{margin-top:16px;display:none}
+#result img{width:100%;border-radius:16px;border:1px solid #333}
+.badge{display:inline-block;background:#ff7a00;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:10px}
+.videoBox{background:#222;border-radius:14px;padding:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;text-align:left}
+.small{font-size:12px;color:#999;margin-top:10px;line-height:1.5}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;max-width:500px;margin-left:auto;margin-right:auto}
+.gallery img{width:100%;border-radius:14px;cursor:pointer;border:2px solid #222}
+footer{margin-top:22px;color:#777;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🦊</div>
+<h1>Fox<span>IA</span> PRO</h1>
+<p class="sub">A raposa que cria foto e vídeo pra você em segundos</p>
+<div style="background:#ff7a00;color:white;display:inline-block;padding:6px 14px;border-radius:20px;font-weight:bold;font-size:13px">✨ + 2.300 criações hoje</div>
+</header>
+<div class="tabs">
+<div class="tab active" id="tabFoto" onclick="showTab('foto')">📸 FOTO</div>
+<div class="tab" id="tabVideo" onclick="showTab('video')">🎬 VÍDEO</div>
+</div>
+<div class="card" id="cardFoto">
+<label>🎲 O que você quer criar?</label>
+<textarea id="prompt" rows="3" placeholder="Ex: raposa laranja no espaço...">Raposa laranja fofa na floresta mágica</textarea>
+<label>🎨 Escolha o estilo</label>
+<div class="chips" id="styles">
+<div class="chip active" data-v="3D Pixar style, cute, ultra detailed, vibrant colors, cinematic lighting">🧸 Pixar 3D</div>
+<div class="chip" data-v="anime style, beautiful, colorful, highly detailed">🌸 Anime</div>
+<div class="chip" data-v="realistic photo, professional photography, 8k, sharp">📷 Realista</div>
+<div class="chip" data-v="Disney style, magical, colorful">🏰 Disney</div>
+<div class="chip" data-v="lego style, toy, colorful">🧱 Lego</div>
+<div class="chip" data-v="cyberpunk, neon lights, futuristic">🌃 Cyberpunk</div>
+<div class="chip" data-v="watercolor painting, artistic">🎨 Aquarela</div>
+<div class="chip" data-v="hyper realistic, professional, studio light">✨ Profissional</div>
+</div>
+<button class="btn-main" onclick="gerarFoto()">✨ GERAR IMAGEM MÁGICA</button>
+<button class="btn-ghost" onclick="surpreender()">🎲 SURPREENDA-ME</button>
+<div id="result">
+<span class="badge">🔥 SUA CRIAÇÃO PRONTA</span>
+<img id="imgOut" src="">
+<button class="btn-main" style="margin-top:10px" onclick="baixar()">⬇️ BAIXAR EM HD</button>
+<button class="btn-green" onclick="compartilhar()">💚 COMPARTILHAR NO WHATSAPP</button>
+</div>
+</div>
+<div class="card" id="cardVideo" style="display:none">
+<label>🎬 Qual vídeo você quer?</label>
+<textarea id="promptVideo" rows="3">Raposa laranja dançando feliz na chuva, floresta colorida</textarea>
+<label>🎞️ Estilo do vídeo</label>
+<select id="estiloVideo">
+<option>Desenho 3D fofo estilo Pixar</option>
+<option>Anime japonês</option>
+<option>Realista cinematográfico</option>
+<option>Desenho infantil colorido</option>
+</select>
+<button class="btn-main" onclick="gerarVideo()">✨ CRIAR PROMPT DE VÍDEO</button>
+<div id="videoResult" style="display:none;margin-top:14px">
+<label>✅ Copie e cole no Hailuo / Kling / CapCut:</label>
+<div class="videoBox" id="videoPrompt"></div>
+<button class="btn-ghost" onclick="copiarVideo()">📋 COPIAR PROMPT</button>
+<a href="https://hailuoai.video" target="_blank"><button class="btn-main" style="margin-top:10px">🚀 ABRIR HAILUO - VÍDEO GRÁTIS</button></a>
+<a href="https://klingai.com" target="_blank"><button class="btn-ghost">🎬 ABRIR KLING AI</button></a>
+</div>
+<p class="small">💡 Dica: O FoxIA cria o prompt perfeito e você gera o vídeo grátis no Hailuo. Assim fica liso, sem travar e com qualidade de cinema!</p>
+</div>
+<p style="margin-top:20px;font-weight:bold">🔥 IDEIAS QUE VIRALIZAM - CLIQUE PRA TESTAR</p>
+<div class="gallery">
+<img src="https://image.pollinations.ai/prompt/Cute%20orange%20fox%20astronaut%20in%20space%2C%203D%20Pixar%20style%2C%20cute%2C%20vibrant?width=600&height=600&nologo=true" onclick="usarIdeia(this.src,'Raposa astronauta no espaço')">
+<img src="https://image.pollinations.ai/prompt/Cute%20cat%20eating%20pizza%20on%20the%20moon%2C%203D%20Pixar%20style?width=600&height=600&nologo=true" onclick="usarIdeia(this.src,'Gato comendo pizza na lua')">
+<img src="https://image.pollinations.ai/prompt/Floating%20castle%20in%20clouds%2C%20anime%20style%2C%20magical?width=600&height=600&nologo=true" onclick="usarIdeia(this.src,'Castelo flutuante nas nuvens')">
+<img src="https://image.pollinations.ai/prompt/Cute%20fox%20with%20butterflies%20in%20magical%20forest%2C%20Disney%20style?width=600&height=600&nologo=true" onclick="usarIdeia(this.src,'Raposa com borboletas na floresta mágica')">
+</div>
+<footer>Feito com ❤️ por FoxIA • Limoeiro do Ajuru - Pará</footer>
+<script>
+let estiloAtual = "3D Pixar style, cute, ultra detailed, vibrant colors, cinematic lighting";
+document.querySelectorAll('.chip').forEach(c=>{
+c.onclick=()=>{
+document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+c.classList.add('active');
+estiloAtual=c.dataset.v;
+}
+});
+function showTab(t){
+document.getElementById('cardFoto').style.display = t==='foto'?'block':'none';
+document.getElementById('cardVideo').style.display = t==='video'?'block':'none';
+document.getElementById('tabFoto').classList.toggle('active', t==='foto');
+document.getElementById('tabVideo').classList.toggle('active', t==='video');
+}
+const ideias = [
+"Raposa laranja fofa com óculos de sol na praia, tomando suco",
+"Castelo de cristal flutuando nas nuvens com arco-íris",
+"Gato astronauta surfando em um meteoro no espaço",
+"Raposa bebê dormindo em uma cama de flores, luz dourada",
+"Dragão bebê fofo comendo sorvete gigante no parque",
+"Unicórnio rosa voando sobre cidade à noite, neon"
+];
+function gerarFoto(){
+let p = document.getElementById('prompt').value.trim();
+if(!p) p="Raposa laranja fofa";
+let full = encodeURIComponent(p + ", " + estiloAtual + ", high quality, sharp, beautiful, no text, no watermark");
+let url = "https://image.pollinations.ai/prompt/"+full+"?width=1024&height=1024&seed="+Math.floor(Math.random()*99999)+"&nologo=true&enhance=true";
+document.getElementById('result').style.display='block';
+document.getElementById('imgOut').src=url;
+document.getElementById('imgOut').scrollIntoView({behavior:'smooth'});
+}
+function surpreender(){
+let s = ideias[Math.floor(Math.random()*ideias.length)];
+document.getElementById('prompt').value=s;
+gerarFoto();
+}
+function baixar(){
+let url=document.getElementById('imgOut').src;
+let a=document.createElement('a'); a.href=url; a.download='foxia.png'; a.target='_blank'; a.click();
+}
+function compartilhar(){
+let texto = encodeURIComponent("Olha o que eu criei no FoxIA 🦊🔥 Cria o seu também: https://paulogabrielsalesfigueredo-droid.github.io/FOX-IA/");
+window.open("https://wa.me/?text="+texto,"_blank");
+}
+function usarIdeia(src, txt){
+document.getElementById('prompt').value=txt;
+showTab('foto');
+window.scrollTo({top:0,behavior:'smooth'});
+gerarFoto();
+}
+function gerarVideo(){
+let p=document.getElementById('promptVideo').value;
+let e=document.getElementById('estiloVideo').value;
+let final = e + ", " + p + ", movimento suave, câmera cinematográfica, cores vibrantes, alta qualidade, 4k, detalhes realistas, sem texto";
+document.getElementById('videoPrompt').innerText=final;
+document.getElementById('videoResult').style.display='block';
+}
+function copiarVideo(){
+let t=document.getElementById('videoPrompt').innerText;
+navigator.clipboard.writeText(t); alert("Prompt copiado! Cola no Hailuo agora 🚀");
+}
+</script>
+</body>
+</html>
